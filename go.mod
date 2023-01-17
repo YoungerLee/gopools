@@ -1,3 +1,3 @@
-module github.com/YoungerLee/go-pools
+module github.com/YoungerLee/gopools
 
 go 1.19

@@ -1,9 +1,9 @@
-# go-pools
+# gopools
 A memory pool manager implemented with generics.
 
 ## Installation
 ```shell
-go get github.com/YoungerLee/go-pools
+go get github.com/YoungerLee/gopools
 ```
 
 ## Quickstart
@@ -14,7 +14,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/YoungerLee/go-pools"
+	"github.com/YoungerLee/gopools"
 )
 
 type PoolId uint64
@@ -31,11 +31,11 @@ type Student struct {
 const STUDENT_POOL_ID PoolId = 1
 
 func init() {
-	pools.Register[PoolId, Student](STUDENT_POOL_ID)
+	gopools.Register[PoolId, Student](STUDENT_POOL_ID)
 }
 
 func main() {
-	s := pools.Get[PoolId, Student](STUDENT_POOL_ID)
+	s := gopools.Get[PoolId, Student](STUDENT_POOL_ID)
 	s.ID = 123456
 	s.Name = "Anonymous"
 	s.Age = 22
@@ -43,7 +43,7 @@ func main() {
 	s.Class = 10
 	s.Marks = []int32{95, 96, 97, 8, 99, 100}
 	fmt.Printf("%p|%+v", s, s)
-	pools.Put(STUDENT_POOL_ID, s)
+	gopools.Put(STUDENT_POOL_ID, s)
 }
 
 ```
@@ -51,7 +51,9 @@ func main() {
 ```
 goos: linux
 goarch: amd64
-pkg: github.com/YoungerLee/go-pools
-BenchmarkWithPool-16              289014              4538 ns/op             392 B/op         16 allocs/op
-BenchmarkWithoutPool-16           237301              5084 ns/op             640 B/op         22 allocs/op
+pkg: github.com/YoungerLee/gopools
+BenchmarkWithPool-16              256724              4468 ns/op             392 B/op         16 allocs/op
+BenchmarkWithoutPool-16           234502              5047 ns/op             640 B/op         22 allocs/op
+PASS
+ok      github.com/YoungerLee/gopools   2.439s
 ```
